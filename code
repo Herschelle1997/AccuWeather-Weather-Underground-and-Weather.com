@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #search-bar {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .weather-sections {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        iframe {
+            width: 32%;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Weather Search</h1>
+    
+    <div>
+        <input type="text" id="search-bar" placeholder="Enter location (e.g., New York)">
+        <button onclick="searchWeather()">Search</button>
+    </div>
+
+    <div class="weather-sections">
+        <!-- Sections for weather websites -->
+        <div id="accuweather" class="weather-section">
+            <h3>AccuWeather</h3>
+            <iframe src="" id="accuWeatherIframe"></iframe>
+        </div>
+        <div id="wunderground" class="weather-section">
+            <h3>Weather Underground</h3>
+            <iframe src="" id="wundergroundIframe"></iframe>
+        </div>
+        <div id="weathercom" class="weather-section">
+            <h3>Weather.com</h3>
+            <iframe src="" id="weatherComIframe"></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+    function searchWeather() {
+        const location = document.getElementById("search-bar").value;
+        
+        if (location) {
+            // Format search query for each weather website
+            const accuweatherUrl = `https://www.accuweather.com/en/search-locations?query=${encodeURIComponent(location)}`;
+            const wundergroundUrl = `https://www.wunderground.com/search?q=${encodeURIComponent(location)}`;
+            const weathercomUrl = `https://weather.com/weather/today/l/${encodeURIComponent(location)}`;
+
+            // Set iframe sources to trigger search
+            document.getElementById("accuWeatherIframe").src = accuweatherUrl;
+            document.getElementById("wundergroundIframe").src = wundergroundUrl;
+            document.getElementById("weatherComIframe").src = weathercomUrl;
+        } else {
+            alert("Please enter a location!");
+        }
+    }
+</script>
+
+</body>
+</html>
